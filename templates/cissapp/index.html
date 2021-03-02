@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+{% extends 'cissapp/layout.html' %}
+{% block content %}
+<div>
+    {% for Topic in topic_list %}
+    <div class="post">
+      <p>タイトル：{{ Topic.title }}</p>
+      <p>メモ：{{ Topic.content }}</p>
+      <p>--------------------</p>
+    </div>
+    {% endfor %}
+    <div class="form">
+      <a href="{% url 'topics:create_topic' %}">新規投稿</a>
+
+    </div>
+</div>
+
+{% endblock %}

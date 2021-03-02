@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% extends 'cissapp/layout.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+  <form class="form-inline my-2" method="GET" action="{% url 'cissapp:search' %}">
+   <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
+   <button type="submit" value="search" class="btn btn-primary">検索</button>
+  </form>
+</div>
+<div>
+  {% if query %}
+  <h4 class="text-center font-weight-bold h4">{{Class.count}}件見つかりました。</h4>
+
+  {% endif%}
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>科目種別</th>
+      <th>授業番号</th>
+      <th>学期</th>
+      <th>曜日</th>
+      <th>科目</th>
+      <th>時限</th>
+      <th>担当教員</th>
+      <th>単位</th>
+      <th>投稿一覧</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for class in class_list %}
+    <tr>
+      <td>{{class.category}}</td>
+      <td>{{class.no}}</td>
+      <td>{{class.semester}}</td>
+      <td>{{class.day}}</td>
+      <td>{{class.name}}</td>
+      <td>{{class.period}}</td>
+      <td>{{class.teacher}}</td>
+      <td>{{class.credit}}</td>
+      <td><a href="./{{class.id}}" class="btn btn-primary">投稿一覧</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,210 @@
+/*
+*  html5resetcss
+*/
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+body{line-height:1}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+nav ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:none}
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}
+ins{background-color:#ff9;color:#000;text-decoration:none}
+mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
+del{text-decoration:line-through}
+abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
+input,select{vertical-align:middle}
+body {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+p  {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+.container {
+    margin: 0 auto;
+    text-align: center;
+    font-family:'Roboto',serif;
+
+}
+.fa-twitter{
+    color: rgb(29,161,242);
+    margin-left: 4px;
+}
+/* top.html =================== */
+.welcome_text{
+    color: black;
+    margin: 132px 0 170px;
+}
+.welcome_text h1{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    letter-spacing: -1px;
+}
+.welcome_text span {
+    font-size: 35px;
+}
+.connect_box a{
+    color: #666666;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.login_twitter {
+    margin-bottom: 40px;
+}
+
+/* home.html ===============-========*/
+header{
+    line-height: 65px;
+    padding: 0 20px;
+    display: flex;
+    background: whitesmoke;
+}
+header .fas{
+    color: darkgray;
+    opacity: 0.8;
+    font-size: 25px;
+
+    line-height: 65px;
+}
+header .fas:hover {
+    opacity: 1;
+}
+.header-logo{
+    font-weight: bold;
+    font-size: 20px;
+}
+.header-left {
+    width: 40%;
+}
+.header-right{
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+
+}
+.search-tag {
+    width: 30%;
+}
+.account-tag {
+    width: 30%;
+}
+.top-wrapper{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+
+}
+.page-top{
+    font-size: 35px;
+    font-weight: bold;
+    padding: 20px 0;
+}
+.info{
+    padding: 20px 0;
+}
+.section-top{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(158, 158, 158);
+}
+.section-list{
+    color: grey;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: left;
+    list-style: none;
+}
+
+/* account.html ====================*/
+.account-name{
+    padding: 20px 0 50px;
+}
+.name-edit {
+    position: relative;
+}
+.name-edit input{
+    width: 80%;
+    text-align: left;
+    line-height: 30px;
+    padding-left: 15px;
+    font-size: 19px;
+    font-weight: bold;
+    color: rgb(85, 83, 83);
+}
+.name-edit i {
+    position: absolute;
+    z-index: 2;
+    font-size: 20px;
+    top: 7px;
+    right: 25px;
+    color: gray;
+}
+.edit-pickUp {
+    display: flex;
+    flex-direction: column;
+}
+.edit-pickUp-section{
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 10px 10px 10px 20px;
+}
+.edit-pickUp-section p{
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+    line-height: 25px;
+}
+.edit-pickUp-section i {
+    font-size: 20px;
+    line-height: 25px;
+    padding-right: 20px;
+    color: gray;
+}
+
+/* hidden-menu=======================*/
+.hidden-menu{
+    height: 812px;
+    width: 100%;
+    background: black;
+    opacity: 0.9;
+}
+.nav-contents{}
+.close-nav{
+    top: 0;
+    right: 0;
+    padding: 8px 10px;
+    font-size: 12px;
+    background-color: orangered;
+    color: #ffffff;
+    position: absolute;
+}
+.menu-top{
+    padding: 50px 0;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+}
+.menu-contents{
+    font-size: 35px;
+    font-weight: bold;
+    text-align: left;
+    padding: 20px 40px;
+    line-height: 40px;
+}
+.menu-contents a{
+    color: #ffffff;
+}

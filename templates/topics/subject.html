@@ -1,0 +1,39 @@
+{% extends 'cissapp/layout.html' %}
+
+{% block content %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a class="section">TOP</a>
+            <a class="active section">{{title.name}}</a>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>{{title.name}}</h3></div>
+                <div class="ui divided items">
+                    {% if topic_list %}
+                    {% for topic in topic_list %}
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">
+                                <a href="{% url 'topics:topic' pk=topic.id %}"><h4>{{topic.title}}</h4></a>
+                            </div>
+                            <div class="meta">
+                                <span class="name">{{topic.author}}</span>
+                                <span class="date">{{topic.created}}</span>
+                                <span class="content">{{topic.content}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="ui warning message">科目が存在しません</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

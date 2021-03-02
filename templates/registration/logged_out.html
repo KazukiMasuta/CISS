@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+{% extends 'cissapp/layout.html' %}
+
+{% block content %}
+<h1>Logged Out</h1>
+<p>Thanks for spending some quality time with the Web site today.</p>
+<p><a class="btn btn-primary" href="{% url 'login' %}">Log in again</a></p>
+{% endblock %}

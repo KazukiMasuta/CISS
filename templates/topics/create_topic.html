@@ -1,0 +1,29 @@
+{% extends 'cissapp/layout.html' %}
+
+{% block content %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a href="{% url 'cissapp:index' %}" class="section">TOP</a>
+            <i class="right angle icon divider"></i>
+        </div>
+
+        <a href="{% url 'cissapp:search' %}">授業に関する投稿</a>
+        <a href="../../cissapp/5020/">その他の投稿</a>
+
+<!--
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>新規投稿</h3></div>
+                <form class="" action="{% url 'topics:create_topic' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="ui button" name="next" value="confirm">作成</button>
+                </form>
+            </div>
+        </div>
+-->
+    </div>
+
+</div>
+{% endblock %}

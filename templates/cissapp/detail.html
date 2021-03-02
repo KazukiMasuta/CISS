@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+{% extends 'cissapp/layout.html' %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="ja">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <title>トピック作成</title>
+</head>
+{% block title %}test_detail {{ block.super }}{% endblock %}
+{% block content %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a href="{% url 'cissapp:index' %}" class="section">TOP</a>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <p>## この下に授業情報</p>
+                <div class="data"><h3>{{data.name}}</h3></div>
+                <p>
+                    科目種別：{{data.categoty}}<br>
+                    授業番号：{{data.no}}<br>
+                    学期：{{data.semester}}<br>
+                    曜日：{{data.day}}<br>
+                    時間：{{data.period}}<br>
+                    先生：{{data.teacher}}<br>
+                    単位数：{{data.credit}}<br>
+                    idは{{data.id}}
+                </p>
+            </div>
+        <!--コメント投稿-->
+        <h4>新規投稿</h4>
+        <div class="ui segment">
+            <form class="" action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="ui button" name="next" value="confirm">作成</button>
+            </form>
+        </div>
+        <!--//コメント投稿-->
+        <!--コメント表示-->
+        <h4>投稿一覧</h4>
+        <div class="ui segment">
+            {% if posts %}
+            {% for post in posts %}
+            <div class="ui segment secondary">
+                <p>投稿日：{{post.created}}<br>タイトル：{{post.title}}<br>投稿内容：{{post.content}}</p>
+                <!--いいね機能-->
+                {% if comment.pub_flg %}
+                <p>{{post.content | comment_filter | safe}}</p>
+                <div class="ui right aligned vertical segment">
+                    <div class="vote_button" style="cursor: pointer;"
+                    data-comment-id="{{post.id}}" data-count="{{post.vote_count}}">
+                        <i class="heart outline icon"></i>
+                        <span class="vote_counter">
+                        {% if post.vote_count > 0 %}
+                            {{post.vote_count}}
+                        {% endif %}
+                        </span>
+                    </div>
+                </div>
+                {% else %}
+                <p style="color: grey">コメントは非表示とされました</p>
+                {% endif %}
+                <!--//いいね機能-->
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="ui warning message"><p>まだコメントはありません</p></div>
+            {% endif %}
+        </div>
+        <!--//コメント表示-->
+
+        </div>
+    </div>
+</div>
+{% endblock %}
