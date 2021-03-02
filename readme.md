@@ -8,3 +8,9 @@ detail.htmlの作成
 
 todo
 ・投稿ページのフロント実装
+
+
+##いいねボタン
+
+detail.html -58 jsが反応しない
+-vote.jsに問題がある　or detail.htmlのコードが足りない　etc
