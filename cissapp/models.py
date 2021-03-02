@@ -66,6 +66,9 @@ class Topic(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
     )
+    pub_flg = models.BooleanField(
+        default=True,
+    )
     modified = models.DateTimeField(
         auto_now=True,
     )
