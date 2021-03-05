@@ -15,6 +15,11 @@ from django.template import RequestContext
 
 from topics.forms import TopicCreateForm
 
+class FirstView(ListView):
+    model = Topic
+    template_name = 'cissapp/first.html'
+
+
 def search(request):
     query = request.GET.get('q')
     if query:
