@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
     <head>
         <meta charset="utf-8">
@@ -51,3 +52,32 @@
         </div>
     </body>
 </html>
+=======
+{% extends '../cissapp/layout.html' %}
+
+{% block content %}
+<h1>Login</h1>
+<section class="common-form">
+    {% if form.errors %}
+        <p class="error-msg">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p class="error-msg">Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+        {% else %}
+            <p class="error-msg">Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}"/>
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    <a class="ui item" href="{% url 'accounts:password_reset' %}">パスワードを忘れた場合</a>
+</section>
+{% endblock %}
+>>>>>>> b63481dd0274c89360b332d2b5c567e188f1534d
