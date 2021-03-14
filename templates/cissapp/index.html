@@ -2,18 +2,42 @@
 <!DOCTYPE html>
 {% extends 'cissapp/layout.html' %}
 {% block content %}
-<div>
-    {% for Topic in topic_list %}
-    <div class="post">
-      <p>タイトル：{{ Topic.title }}</p>
-      <p>メモ：{{ Topic.content }}</p>
-      <p>--------------------</p>
-    </div>
-    {% endfor %}
-    <div class="form">
-      <a href="{% url 'topics:create_topic' %}">新規投稿</a>
 
+  <div class="border">
+    <br>
+    <h3>新規投稿</h3>
+    <br>
+    <div class="border col-md">
+      <div class="row">
+        <div class="col-md">
+          <a href="{% url 'cissapp:search' %}"><button class="btn btn-primary" type="submit">授業に関する投稿</button></a>
+          <a href="./5020/"><button class="btn btn-primary" type="submit">その他の投稿</button></a>
+        </div>
+
+
+      </div>
     </div>
-</div>
+
+  </div>
+  <div class="col-md">
+    <h1>投稿一覧</h1>
+    {% for Topic in topic_list %}
+      <div class="card" style="padding:0;">
+        <div class="card-header">
+          <div class="row" style="margin:auto;">
+            <h6 class="col-9">{{ Topic.author }} >> {{ Topic.data.name}}</h6>
+            <p class="col-3">{{ Topic.time}}</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <p　class="card-text">{{ Topic.content }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="form">
+
+  </div>
+
 
 {% endblock %}

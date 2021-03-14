@@ -24,7 +24,7 @@ urlpatterns = [
     path('cissapp/', include('cissapp.urls')),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('cissapp.urls')),
+    path('', include('accounts.urls')),
     path('topics/', include('topics.urls')),
     path('api/', include('api.urls')),
 

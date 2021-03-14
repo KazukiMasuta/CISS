@@ -6,7 +6,7 @@ from .forms import CustomAuthenticationForm
 app_name = 'accounts'
 
 urlpatterns = [
-    #path('', av.LoginView.as_view(form_class=CustomAuthenticationForm), name='login'),
+    path('', av.LoginView.as_view(form_class=CustomAuthenticationForm), name='login'),
     path('signup/', views.SignUpView.as_view(), name='signup'),
 
     path('login/', av.LoginView.as_view(form_class=CustomAuthenticationForm), name='login'),

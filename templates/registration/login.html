@@ -1,27 +1,53 @@
 <!DOCTYPE html>
-{% extends '../cissapp/layout.html' %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/761773b236.js" crossorigin="anonymous"></script>
 
-{% block content %}
-<h1>Login</h1>
-<section class="common-form">
-    {% if form.errors %}
-        <p class="error-msg">Your username and password didn't match. Please try again.</p>
-    {% endif %}
+        <style>
+        body {padding-top: 80px;}
+        .fas{margin-right: 50px;}
+        .container{padding-top: 100px;}
+        section{margin-bottom: 60px;}
+        </style>
 
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p class="error-msg">Your account doesn't have access to this page. To proceed,
-            please login with an account that has access.</p>
-        {% else %}
-            <p class="error-msg">Please login to see this page.</p>
-        {% endif %}
-    {% endif %}
 
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}"/>
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Login</button>
-    </form>
-</section>
-{% endblock %}
+        <title>CISS for TMU</title>
+    </head>
+    <body>
+        <div class="container">
+
+        <section class="common-form">
+            <h1>Login</h1>
+            {% if form.errors %}
+                <p class="error-msg">Your username and password didn't match. Please try again.</p>
+            {% endif %}
+
+            {% if next %}
+                {% if user.is_authenticated %}
+                    <p class="error-msg">Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+                {% else %}
+                    <p class="error-msg">Please login to see this page.</p>
+                {% endif %}
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+                {{ form.as_p }}
+                <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+
+
+        </section>
+        <section>
+            <h1>New guys here!</h1>
+            <a href="{% url 'accounts:signup' %}">
+            <button class="btn btn-info" type="submit" >Signup</button></a>
+        </section>
+        </div>
+    </body>
+</html>
