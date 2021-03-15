@@ -10,13 +10,32 @@
 
         <style>
         body {}
+        @media screen and (min-width: 960px) {
+            /* 960px以上に適用されるCSS（PC用） */
         .fas{margin-right: 10px;}
         .container-fluid{
             padding-top:10px;
         }
         .sidebar{
             position: sticky;
-            top:10px;
+            top:0px;
+            height: 700px;
+            margin:0, 10px;
+
+        }
+        .imageTag{
+            height:100px;
+        }
+        .menuTag{
+            height: 600px;
+            text-align: inherit;
+        }
+        .accountTag{
+            height: 100px;
+        }
+        }
+        @media screen and (max-width: 480px) {
+            /* 480px以下に適用されるCSS（スマホ用） */
         }
         </style>
 
@@ -24,15 +43,15 @@
     </head>
     <body>
         <div class="row" style="width:80%; margin:auto;">
-            <div class="col-3 bg-dark" >
+            <div class="col-md-4 bg-dark " >
                 <div class="sidebar">
-                    <div class="navbar-header">
+                    <div class="navbar-header imageTag">
                         <a href="{% url 'cissapp:index' %}" class="navbar-brand">
-                            <img  src="static/cissapp/picture/cissロゴ案２.png"  height="70px" >
+                            <img  src="../static/cissapp/picture/cissロゴ案２.png"  height="100px" >
                         </a>
                     </div>
 
-                    <nav class="navbar navbar-dark">
+                    <nav class="navbar navbar-dark menuTag">
 
                         <ul class="nav navbar-nav" style="font-size:25px">
                             <li class="nav-item "><a class="nav-link" href="{% url 'cissapp:index' %}"><i class="fas fa-home"></i>ホーム</a></li>
@@ -40,11 +59,11 @@
                             <li class="nav-item "><a class="nav-link" href="#"><i class="fas fa-user-circle fa-x glyphicon"></i>アカウント</a></li>
                         </ul>
                     </nav>
-                    <div class="d-flex align-items-end align-bottom">
-                        <ul class="navbar-nav "　 >
+                    <nav class="navbar navbar-dark">
+                        <ul class="navbar-nav ">
                             {% if user.is_authenticated %}
                                 <li class="nav-item ">
-                                    <span class="navbar-text">{{ user }} - </span>
+                                    <span class="navbar-text">{{ user }}</span>
                                 </li>
                                 <li class="nav-item ">
                                     <a href="{% url 'logout' %}" class="logout nav-link">Logout</a>
@@ -56,13 +75,13 @@
                                 </li>
                             {% endif %}
                         </ul>
-                    </div>
+                    </nav>
 
                 </div>
 
             </div>
 
-            <div class="col-9">
+            <div class="col-md-8">
                 <div class="container-fluid">
                     {% block content %}
                     {% endblock %}

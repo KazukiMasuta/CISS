@@ -3,7 +3,7 @@
 {% extends 'cissapp/layout.html' %}
 {% block content %}
 
-  <div class="border" style="padding:20px;">
+  <div class="border">
     <h3>新規投稿</h3>
     <br>
     <div class="border col-md">
@@ -27,8 +27,8 @@
       <div class="card" style="padding:0;">
         <div class="card-header">
           <div class="row" style="margin:auto;">
-            <h6 class="col-9">{{ Topic.author }} >> {{ Topic.data.name}}</h6>
-            <p class="col-3">{{ Topic.time}}</p>
+            <h6 class="col-7">{{ Topic.author }} >> {{ Topic.data.name}}</h6>
+            <p class="col-5 text-right">{{ Topic.time}}</p>
           </div>
         </div>
         <div class="card-body">
