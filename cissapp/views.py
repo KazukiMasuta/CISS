@@ -39,7 +39,7 @@ def search(request):
 class IndexView(ListView):
     model = Topic
     template_name = 'cissapp/index.html'
-    queryset = Topic.objects.order_by('-created')
+    queryset = Topic.objects.order_by('-created')[:10]
     context_object_name = 'topic_list'
 
 class TopicDetailView(FormView):
