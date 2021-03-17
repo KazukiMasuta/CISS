@@ -2,26 +2,11 @@
 <!DOCTYPE html>
 {% extends 'cissapp/layout.html' %}
 {% block content %}
-
-  <div class="border">
-    <h3>新規投稿</h3>
+<style>
+</style>
+  <div class="col-md" style="margin-top:100px;">
     <br>
-    <div class="border col-md">
-      <div class="row">
-        <div class="col-md" style="padding:20px;">
-          <a class="ml-4" href="{% url 'cissapp:search' %}"><button class="btn btn-primary" type="submit">授業に関する投稿</button></a>
-          <a class="ml-4" href="./5020/"><button class="btn btn-primary" type="submit">その他の投稿</button></a>
-
-        </div>
-
-
-      </div>
-    </div>
-
-  </div>
-  <div class="col-md" style="margin-top:20px;">
-    <br>
-    <h3>新規投稿</h3>
+    <h3>新規投稿一覧</h3>
     <br>
     {% for Topic in topic_list %}
       <div class="card" style="padding:0;">
@@ -36,9 +21,6 @@
         </div>
       </div>
     {% endfor %}
-  </div>
-  <div class="form">
-
   </div>
 
 
