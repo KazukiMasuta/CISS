@@ -2,7 +2,10 @@
 {% extends 'cissapp/layout.html' %}
 {% block content %}
 
+<br>
+<h3 class="text-center">授業を検索</h3>
 <div class="d-flex justify-content-center">
+
   <form class="form-inline my-2" method="GET" action="{% url 'cissapp:search' %}">
    <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
    <button type="submit" value="search" class="btn btn-primary">検索</button>
