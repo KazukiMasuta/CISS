@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'topics',
     'api',
     'debug_toolbar',
+    'club',
 ]
 INTERNAL_IPS = [
     '127.0.0.1',
