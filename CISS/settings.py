@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'api',
     'debug_toolbar',
     'club',
+    'trade',
 ]
 INTERNAL_IPS = [
     '127.0.0.1',
