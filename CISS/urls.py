@@ -27,7 +27,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('topics/', include('topics.urls')),
     path('api/', include('api.urls')),
-
+    path('club/', include('club.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
