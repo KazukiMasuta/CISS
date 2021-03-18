@@ -13,13 +13,37 @@
 {% block content %}
 <div class="ui grid stackable">
     <div class="eleven wide column">
-        <div class="ui breadcrumb">
-            <a href="{% url 'cissapp:index' %}" class="section">TOP</a>
-        </div>
         <div class="ui segment">
             <div class="content">
-                <p>## この下に授業情報</p>
                 <div class="data"><h3>{{data.name}}</h3></div>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>科目種別</th>
+                        <th>授業番号</th>
+                        <th>学期</th>
+                        <th>曜日</th>
+                        <th>科目</th>
+                        <th>時限</th>
+                        <th>担当教員</th>
+                        <th>単位</th>
+                        <th>投稿一覧</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{data.categoty}}</td>
+                        <td>{{data.no}}}</td>
+                        <td>{{class.semester}}</td>
+                        <td>{{class.day}}</td>
+                        <td>{{class.name}}</td>
+                        <td>{{class.period}}</td>
+                        <td>{{class.teacher}}</td>
+                        <td>{{class.credit}}</td>
+
+                      </tr>
+                    </tbody>
+                  </table>
                 <p>
                     科目種別：{{data.categoty}}<br>
                     授業番号：{{data.no}}<br>
