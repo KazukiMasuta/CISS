@@ -55,6 +55,7 @@ class TopicFormView(FormView):
     success_url = reverse_lazy('cissapp:index')
 
     def form_valid(self, form):
+        form.instance.author = self.request.user
         ctx = {'form': form}
         if self.request.POST.get('next', '') == 'confirm':
             return render(self.request, 'topics/confirm_topic.html', ctx)
@@ -71,6 +72,7 @@ class noclassTopicFormView(FormView):
     form_class = noclassTopicCreateForm
 
     def form_valid(self, form):
+        form.instance.author = self.request.user
         ctx = {'form': form}
         if self.request.POST.get('next', '') == 'confirm':
             return render(self.request, 'topics/confirm_topic.html', ctx)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 
 class Data(models.Model):
@@ -58,7 +59,8 @@ class Topic(models.Model):
         blank=False,
     )
     author = models.ForeignKey(
-        get_user_model(), on_delete=models.CASCADE, blank=True
+        User,
+        on_delete=models.CASCADE
     )
     time = models.DateTimeField(
         default=timezone.now
