@@ -5,11 +5,15 @@ from django.views.generic import TemplateView, ListView, CreateView, FormView, D
 from . forms import TopicModelForm, TopicForm, TopicCreateForm, CommentModelForm
 from .models import Topic2, Category, Comment
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+@login_required
 def top(request):
     ctx = {'title': 'サークル'}
     return render(request, 'club/top.html', ctx)
 
-class TopView(TemplateView):
+class TopView(TemplateView,LoginRequiredMixin):
     template_name = 'club/top.html'
 
     def get_context_data(self, **kwargs):
@@ -17,17 +21,17 @@ class TopView(TemplateView):
         ctx['title'] = 'サークルのページ'
         return ctx
     
-class TopicListView(ListView):
+class TopicListView(ListView,LoginRequiredMixin):
     template_name = 'club/top.html'
     queryset = Topic2.objects.order_by('-created')
     context_object_name = 'topic_list'
 
-class TopicDetailView(DetailView):
+class TopicDetailView(DetailView,LoginRequiredMixin):
     template_name = 'club/detail_topic.html'
     model = Topic2
     context_object_name = 'topic'
 
-class TopicFormView(FormView):
+class TopicFormView(FormView,LoginRequiredMixin):
     template_name = 'club/create_topic.html'
     form_class = TopicCreateForm
     success_url = reverse_lazy('club:top')
@@ -37,6 +41,7 @@ class TopicFormView(FormView):
         form.save()
         return super().form_valid(form)
 
+@login_required
 def topic_create(request):
     template_name = 'club/create_topic.html'
     ctx = {}
@@ -53,7 +58,7 @@ def topic_create(request):
             ctx['form'] = topic_form
             return render(request, template_name, ctx)
 
-class TopicCreateView(CreateView):
+class TopicCreateView(CreateView,LoginRequiredMixin):
     template_name = 'club/create_topic.html'
     form_class = TopicCreateForm
     model = Topic2
@@ -72,7 +77,7 @@ class TopicCreateView(CreateView):
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
             return redirect(reverse_lazy('club:top'))
 
-class CategoryView(ListView):
+class CategoryView(ListView,LoginRequiredMixin):
     template_name = 'club/category.html'
     context_object_name = 'topic_list'
 
@@ -84,7 +89,7 @@ class CategoryView(ListView):
         ctx['category'] = get_object_or_404(Category, url_code=self.kwargs['url_code'])
         return ctx
 
-class TopicAndCommentView(FormView):
+class TopicAndCommentView(FormView,LoginRequiredMixin):
     template_name = 'club/detail_topic.html'
     form_class = CommentModelForm
     

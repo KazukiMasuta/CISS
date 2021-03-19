@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, UpdateView
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView,
@@ -16,12 +17,13 @@ from .forms import (
     UserInfoChangeForm,
     CustomAuthenticationForm, CustomPasswordChangeForm,
     CustomPasswordResetForm, CustomSetPasswordForm,
-    CustomUserChangeForm, CustomUserCreationForm, EmailChangeForm
+    CustomUserChangeForm, CustomUserCreationForm, EmailChangeForm,
+    EmailAuthenticationForm
 )
 
 # Create your views here.
 
-class UserCreateView(FormView):
+class UserCreateView(FormView,LoginRequiredMixin):
     # form_class = UserCreationForm
     form_class = CustomUserCreationForm
     template_name = 'registration/create.html'
@@ -93,22 +95,23 @@ class UserChangeView(LoginRequiredMixin, FormView):
         })
         return kwargs
 
-class CustomLoginView(LoginView):
-    form_class = CustomAuthenticationForm
+class CustomLoginView(LoginView,LoginRequiredMixin):
+    # form_class = CustomAuthenticationForm
+    form_class = EmailAuthenticationForm
 
-class CustomLogoutView(LogoutView):
+class CustomLogoutView(LogoutView,LoginRequiredMixin):
     template_name = 'registration/logged_out.html'
-    next_page = '/'
+    next_page = '/accounts/login/'
 
-class CustomPasswordChangeView(PasswordChangeView):
+class CustomPasswordChangeView(PasswordChangeView,LoginRequiredMixin):
     form_class = CustomPasswordChangeForm
     template_name = 'registration/password_change_form.html'
     success_url = reverse_lazy('accounts:password_change_done')
 
-class CustomPasswordChangeDoneView(PasswordChangeDoneView):
+class CustomPasswordChangeDoneView(PasswordChangeDoneView,LoginRequiredMixin):
     template_name = 'registration/password_change_done.html'
 
-class CustomPasswordResetView(PasswordResetView):
+class CustomPasswordResetView(PasswordResetView,LoginRequiredMixin):
     email_template_name = 'registration/password_reset_email.html'
     form_class = CustomPasswordResetForm
     from_email = 'info@example.com'
@@ -116,15 +119,15 @@ class CustomPasswordResetView(PasswordResetView):
     success_url = reverse_lazy('accounts:password_reset_done')
     template_name = 'registration/password_reset_form.html'
 
-class CustomPasswordResetDoneView(PasswordResetDoneView):
+class CustomPasswordResetDoneView(PasswordResetDoneView,LoginRequiredMixin):
     template_name = 'registration/password_reset_done.html'
 
-class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+class CustomPasswordResetConfirmView(PasswordResetConfirmView,LoginRequiredMixin):
     form_class = CustomSetPasswordForm
     post_reset_login = False
     post_reset_login_backend = None
     success_url = reverse_lazy('accounts:password_reset_complete')
     template_name = 'registration/password_reset_confirm.html'
 
-class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+class CustomPasswordResetCompleteView(PasswordResetCompleteView,LoginRequiredMixin):
     template_name = 'registration/password_reset_complete.html'

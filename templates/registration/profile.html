@@ -15,12 +15,12 @@
                 <div class="ui divided bulleted list">
                     <div class="item">ログインID：{{user.username}}</div>
                     <div class="item">E-mail：{% if user.email %}{{user.email}}{% else %}未設定{% endif %}</div>
-                    <div class="item">名字：{% if user.last_name %}{{user.last_name}}{% else %}未設定{% endif %}</div>
-                    <div class="item">名前：{% if user.first_name %}{{user.first_name}}{% else %}未設定{% endif %}</div>
+                    <!-- <div class="item">名字：{% if user.last_name %}{{user.last_name}}{% else %}未設定{% endif %}</div>
+                    <div class="item">名前：{% if user.first_name %}{{user.first_name}}{% else %}未設定{% endif %}</div> -->
                 </div>
             </div>
         </div>
-        <a class="ui button" href="">登録情報変更</a>
+        <a class="ui button" href="{% url 'accounts:change' %}"%>登録情報変更</a>
         <a class="ui button" href="{% url 'password_change' %}">パスワード変更</a>
     </div>
 </div>
