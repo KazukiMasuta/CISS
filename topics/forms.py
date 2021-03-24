@@ -28,6 +28,8 @@ class TopicCreateForm(ModelForm):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
         self.fields['author'].widget.attrs['value'] = '匿名'
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
 
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super().get_form_kwargs()
@@ -57,7 +59,7 @@ class noclassTopicCreateForm(ModelForm):
             #'data',
             'title',
             'content',
-            'author',
+
         ]
 
     def __init__(self, *args, **kwargs):

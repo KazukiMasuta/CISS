@@ -50,6 +50,7 @@ class TopicDetailView(FormView,LoginRequiredMixin):
     form_class = TopicCreateForm
 
     def form_valid(self, form):
+        form.instance.author = self.request.user
         ctx = {'form': form}
         if self.request.POST.get('next', '') == 'confirm':
             return render(self.request, 'topics/confirm_topic.html', ctx)

@@ -11,68 +11,94 @@
 </head>
 {% block title %}test_detail {{ block.super }}{% endblock %}
 {% block content %}
-<div class="ui grid stackable">
-    <div class="eleven wide column">
-        <div class="ui segment">
-            <div class="content">
-                <div class="data"><h3>{{data.name}}</h3></div>
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th>科目種別</th>
-                        <th>授業番号</th>
-                        <th>学期</th>
-                        <th>曜日</th>
-                        <th>科目</th>
-                        <th>時限</th>
-                        <th>担当教員</th>
-                        <th>単位</th>
-                        <th>投稿一覧</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{{data.categoty}}</td>
-                        <td>{{data.no}}}</td>
-                        <td>{{class.semester}}</td>
-                        <td>{{class.day}}</td>
-                        <td>{{class.name}}</td>
-                        <td>{{class.period}}</td>
-                        <td>{{class.teacher}}</td>
-                        <td>{{class.credit}}</td>
+<br>
+<h3 class="text-center">{{data.name}}</h3>
+<br>
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>科目種別</th>
+        <th>授業番号</th>
+        <th>学期</th>
+        <th>曜日</th>
 
-                      </tr>
-                    </tbody>
-                  </table>
-                <p>
-                    科目種別：{{data.categoty}}<br>
-                    授業番号：{{data.no}}<br>
-                    学期：{{data.semester}}<br>
-                    曜日：{{data.day}}<br>
-                    時間：{{data.period}}<br>
-                    先生：{{data.teacher}}<br>
-                    単位数：{{data.credit}}<br>
-                    idは{{data.id}}
-                </p>
-            </div>
+        <th>時限</th>
+        <th>担当教員</th>
+        <th>単位</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{data.categoty}}</td>
+        <td>{{data.no}}</td>
+        <td>{{data.semester}}</td>
+        <td>{{data.day}}</td>
+        <td>{{data.period}}</td>
+        <td>{{data.teacher}}</td>
+        <td>{{data.credit}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
         <!--コメント投稿-->
-        <h4>新規投稿</h4>
-        <div class="ui segment">
-            <form class="" action="" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="ui button" name="next" value="confirm">作成</button>
-            </form>
-        </div>
+
+
+        <form class="border" style="padding:20px;">
+            <h4 class="text-center">新規投稿</h4>
+            <div class="form-group">
+                <form class="" action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-primary " name="next" value="confirm" style="width:30%;">作成</button>
+                    </div>
+
+                </form>
+            </div>
+        </form>
         <!--//コメント投稿-->
         <!--コメント表示-->
-        <h4>投稿一覧</h4>
+        <br>
+        <h4 class="text-center">投稿一覧</h4>
+        <br>
+        {% if posts %}
+        {% for post in posts %}
+            <div class="card" style="padding:0;">
+                <div class="card-header">
+                    <div class="row" style="margin:auto;">
+                        <h6 class="col-7">{{ post.author }} >> {{ post.data.name}}</h6>
+                        <p class="col-5 text-right">{{ post.time}}</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if post.pub_flg %}
+                    <p　class="card-text">{{post.content | comment_filter | safe}}</p>
+                    <div class="vote_button text-right" style="cursor: pointer;"
+                    data-comment-id="{{post.id}}" data-count="{{post.vote_count}}">
+                        <i class="far fa-heart"></i>
+                        <span class="vote_counter">
+                        {% if post.vote_count >= 0 %}
+                            {{post.vote_count}}
+                        {% endif %}
+                        </span>
+                    </div>
+                    {% else %}
+                        <p style="color: grey">コメントは非表示とされました</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="ui warning message"><p>まだコメントはありません</p></div>
+        {% endif %}
+        <!----
         <div class="ui segment">
             {% if posts %}
             {% for post in posts %}
             <div class="ui segment secondary">
                 <p>投稿日：{{post.created}}<br>タイトル：{{post.title}}</p>
-                <!--いいね機能-->
+
                 {% if post.pub_flg %}
                 <p>投稿内容：{{post.content | comment_filter | safe}}</p>
                 <div class="ui right aligned vertical segment">
@@ -89,16 +115,17 @@
                 {% else %}
                 <p style="color: grey">コメントは非表示とされました</p>
                 {% endif %}
-                <!--//いいね機能-->
+
             </div>
             {% endfor %}
             {% else %}
             <div class="ui warning message"><p>まだコメントはありません</p></div>
             {% endif %}
         </div>
-        <!--//コメント表示-->
+
 
         </div>
+        -->
     </div>
 </div>
 {% endblock %}
