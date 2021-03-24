@@ -72,7 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(
         _('email address'),
-        help_text='この項目は必須です。メールアドレスは公開されません。',
+        help_text='この項目は必須です。メールアドレスは公開されません。@ed.tmu.ac.jpのみ使用できます。',
         blank=False
     )
     is_staff = models.BooleanField(
