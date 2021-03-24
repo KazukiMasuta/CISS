@@ -137,3 +137,10 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'cissapp:index'
+
+AUTH_USER_MODEL = 'accounts.User'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuthBackend',    
+]

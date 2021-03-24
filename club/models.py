@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 
 class TopicManager(models.Manager):
     # Topic操作に関する処理を追加
@@ -36,8 +36,10 @@ class Category(models.Model):
 
 class Topic2(models.Model):
     user_name = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     title = models.CharField(
         'タイトル',
@@ -76,8 +78,10 @@ class Comment(models.Model):
         default=0,
     )
     user_name = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     topic = models.ForeignKey(
         Topic2,

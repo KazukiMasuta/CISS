@@ -15,11 +15,14 @@ from django.template import RequestContext
 
 from topics.forms import TopicCreateForm
 
-class FirstView(ListView):
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+class FirstView(ListView,LoginRequiredMixin):
     model = Topic
     template_name = 'cissapp/first.html'
 
-
+@login_required
 def search(request):
     query = request.GET.get('q')
     if query:
@@ -36,13 +39,13 @@ def search(request):
     class_list = Class.values()
     return render(request, 'cissapp/search.html', {'Class': Class, 'class_list': class_list, 'query': query,})
 
-class IndexView(ListView):
+class IndexView(ListView,LoginRequiredMixin):
     model = Topic
     template_name = 'cissapp/index.html'
     queryset = Topic.objects.order_by('-created')[:10]
     context_object_name = 'topic_list'
 
-class TopicDetailView(FormView):
+class TopicDetailView(FormView,LoginRequiredMixin):
     template_name = 'cissapp/detail.html'
     form_class = TopicCreateForm
 
