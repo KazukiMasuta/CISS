@@ -20,6 +20,8 @@ from .models import User
 
 UserModel = get_user_model()
 
+import re
+
 class UserInfoChangeForm(ModelForm):
     class Meta:
         model = User
@@ -106,9 +108,16 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ('username', 'email')
 
+    def clean(self):
+        cleaned_data=super().clean()
+        email = cleaned_data.get("email")
+        m = re.search('hokudai.ac.jp$',email)
+        if m is None:
+            self._errors["email"]=["登録に使えるのはhokudai.ac.jpを持つメールアドレスのみです。"]
+
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix','')
         super().__init__(*args, **kwargs)
+        self.fields['email'].help_text= "登録に使えるのはhokudai.ac.jpを持つメールアドレスのみです。"
 
 class EmailAuthenticationForm(Form):
     """
