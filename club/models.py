@@ -62,6 +62,9 @@ class Topic2(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
     )
+    pub_flg = models.BooleanField(
+        default=True,
+    )
     modified = models.DateTimeField(
         auto_now=True,
     )
@@ -100,3 +103,32 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{}-{}'.format(self.topic.id, self.no)
+
+
+class VoteManager(models.Manager):
+    def create_vote(self, ip_address, comment_id):
+        vote = self.model(
+            ip_address=ip_address,
+            comment_id = comment_id
+        )
+        try:
+            vote.save()
+        except:
+            return False
+        return True
+
+class Vote(models.Model):
+    topic = models.ForeignKey(
+        Topic2,
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    ip_address = models.CharField(
+        'IPアドレス',
+        max_length=50,
+    )
+
+    objects = VoteManager()
+
+    def __str__(self):
+        return '{}-{}'.format(self.topic.title, self.topic.no)

@@ -57,7 +57,7 @@ class EmailChangeView(LoginRequiredMixin, FormView):
     template_name = 'registration/change.html'
     form_class = EmailChangeForm
     success_url = reverse_lazy('accounts:profile')
-    
+
     def form_valid(self, form):
         #formのupdateメソッドにログインユーザーを渡して更新
         form.update(user=self.request.user)
@@ -79,7 +79,7 @@ class UserChangeView(LoginRequiredMixin, FormView):
     template_name = 'registration/change.html'
     form_class = UserInfoChangeForm
     success_url = reverse_lazy('accounts:profile')
-    
+
     def form_valid(self, form):
         #formのupdateメソッドにログインユーザーを渡して更新
         form.update(user=self.request.user)
@@ -105,8 +105,9 @@ class CustomLogoutView(LogoutView,LoginRequiredMixin):
 
 class CustomPasswordChangeView(PasswordChangeView,LoginRequiredMixin):
     form_class = CustomPasswordChangeForm
-    template_name = 'registration/password_change_form.html'
-    success_url = reverse_lazy('accounts:password_change_done')
+    template_name = 'registration/change.html'
+    success_url = reverse_lazy('accounts:profile')
+    #accounts:password_change_doneに飛ばずにアカウント画面にそのまま飛ぶようにした
 
 class CustomPasswordChangeDoneView(PasswordChangeDoneView,LoginRequiredMixin):
     template_name = 'registration/password_change_done.html'

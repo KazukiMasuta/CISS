@@ -9,10 +9,26 @@
     <script src="https://kit.fontawesome.com/761773b236.js" crossorigin="anonymous"></script>
 
         <style>
+        @media screen and (min-width: 480px) {
         body {padding-top: 80px;}
         .fas{margin-right: 50px;}
-        .container{padding-top: 100px;}
         section{margin-bottom: 60px;}
+        .container-fluid{
+            width: 50%;
+            margin: auto;
+        }
+        }
+
+        @media screen and (max-width: 480px) {
+            /* 480px以下に適用されるCSS（スマホ用） */
+        .container-fluid{
+            width: 90%;
+            padding:
+        }
+        section{
+            margin-bottom: 100px;
+        }
+        }
         </style>
 
 
@@ -20,10 +36,13 @@
 </head>
 <body>
     <body>
-        <div class="container">
+        <div class="container-fluid">
+        <br>
+        <h1 class="text-center">Welcome to CISS!</h1>
+        <br>
 
         <section class="common-form">
-            <h1>Login</h1>
+            <h2>Login</h2>
             {% if form.errors %}
                 <p class="error-msg">Your username and password didn't match. Please try again.</p>
             {% endif %}
@@ -37,7 +56,7 @@
                 {% endif %}
             {% endif %}
 
-            <form action="{% url 'login' %}" method="post">
+            <form action="{% url 'login' %}" method="post" >
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}"/>
                 {{ form.as_p }}
@@ -47,7 +66,7 @@
 
         </section>
         <section>
-            <h1>New guys here!</h1>
+            <h2>New guys here!</h2>
             <a href="{% url 'accounts:create' %}">
             <button class="btn btn-info" type="submit" >Signup</button></a>
         </section>

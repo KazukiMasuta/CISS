@@ -34,6 +34,9 @@ class UserInfoChangeForm(ModelForm):
     def __init__(self, email=None, first_name=None, last_name=None, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
+        #bootstrapをフォームに適用するために必要
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
         # ユーザーの更新前情報をフォームに挿入
         if email:
             self.fields['email'].widget.attrs['value'] = email
@@ -56,6 +59,8 @@ class EmailChangeForm(ModelForm):
     def __init__(self, email=None, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
         # ユーザーの更新前情報をフォームに挿入
         if email:
             self.fields['email'].widget.attrs['value'] = email
@@ -74,6 +79,8 @@ class CustomPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
 
 class CustomPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
@@ -89,7 +96,7 @@ class AdminUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email')
-    
+
     # def save(self, commit=True):
     #     user = User.objects.create_user(
     #         self.cleaned_data["name"],
@@ -102,7 +109,7 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
         fields = '__all__'
-        
+
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User

@@ -31,4 +31,62 @@
     </div>
 
 </div>
+
+<br>
+
+
+
+            <div class="col-md-12 border">
+                <h4 class="text-center m-5">内容を確認してください</h4>
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <h6 class="mb-0">科目</h6>
+                      </div>
+                      <div class="col-sm-8 text-secondary">
+                        {{form.title.value}}
+                      </div>
+
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                          <h6 class="mb-0">お名前</h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            {{form.author.value}}
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                          <h6 class="mb-0">本文</h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            {form.content.value}}
+                        </div>
+
+                    </div>
+
+
+                  </div>
+                </div>
+                <form class="form-group " action="" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{field.as_hidden}}
+                    {% endfor %}
+                    <div class="row my-5">
+                        <button class="btn btn-outline-primary col mx-5" type="submit" name="next" value="back">戻る</button>
+                        <button class="btn btn-outline-success col mx-5" type="submit" name="next" value="create">作成</button>
+                    </div>
+
+                </form>
+
+
+
+
+            </div>
 {% endblock %}
