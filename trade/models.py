@@ -31,6 +31,9 @@ class Topic3(models.Model):
     modified = models.DateTimeField(
         auto_now=True,
     )
+    pub_flg = models.BooleanField(
+        default=True,
+    )
     objects = TopicManager()
 
     def __str__(self):

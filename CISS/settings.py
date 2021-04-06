@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'club',
     'trade',
+    'django_static_md5url',
 ]
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -131,9 +132,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static')
 ]
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'cissapp:index'
@@ -142,5 +145,5 @@ AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'accounts.backends.EmailAuthBackend',    
+    'accounts.backends.EmailAuthBackend',
 ]

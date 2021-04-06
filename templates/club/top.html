@@ -3,12 +3,7 @@
 {% load static %}
 {% load topicsfilters %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="content-language" content="ja">
-    <link href="{% static 'style.css' %}" rel="stylesheet">
-    <title>{{title}}</title>
-</head>
+
 <body>
 <br>
 <h3 class="text-center">部活・サークル等</h3>
@@ -99,9 +94,8 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/vote.js' %}" type="text/javascript"></script>
 {% endblock %}

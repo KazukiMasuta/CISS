@@ -10,6 +10,22 @@ class TopicCreateForm(ModelForm):
             'message',
         ]
 
+        widgets = {
+            'message': forms.Textarea(
+                    attrs={
+                        'rows':4, 'cols':7,
+                        'placeholder': '本文だお'
+                        }
+                    )
+        }
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+#unused
 class TopicModelForm(forms.ModelForm):
     class Meta:
         model=Topic3

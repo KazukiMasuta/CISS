@@ -1,38 +1,92 @@
 <!DOCTYPE html>
 {% extends 'cissapp/layout.html' %}
 {% load static %}
+{% load topicsfilters %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="content-language" content="ja">
-    <link href="{% static 'style.css' %}" rel="stylesheet">
-    <title>{{title}}</title>
-</head>
+
 <body>
-<h1>{{title}}</h1>
-<p>## ここは物々交換板</p>
-<div class="ui grid stackable">
-    <div class="eleven wide column">
-        <div class="ui breadcrumb">
-            <a class="active section">TOP</a>
+
+<br>
+<h3 class="text-center">物々交換板</h3>
+<br>
+<p>
+    ここは要らなくなった教科書などを誰かにあげたい人ともらいたい人がつながる場です。以下のように書き込んでいただくことを想定しています。
+    =========================================================<br>
+    後期4限の信号処理で使う「ディジタル信号処理のエッセンス」譲れます！<br>
+    連絡はTwitter@BasyaKuEまで！！！<br>
+    =========================================================<br>
+    連絡先の書き込みを忘れないでください。ただし公開してもよい連絡先にしてください。<br>
+</p>
+<p>
+    <b>注意</b><br>
+    ここでの取引によって生じたトラブル（金銭等）に関して当サービスおよび管理者は責任をいっさい負いかねます。
+</p>
+<div class="border" style="padding:20px;">
+    <h4 class="text-center">新規投稿</h4>
+    <form class="" action="" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                {{form.title.label_tag}}{{ form.title}}
+            </div>
         </div>
-        <div>
-            <p>
-                ここは要らなくなった教科書などを誰かにあげたい人ともらいたい人がつながる場です。以下のように書き込んでいただくことを想定しています。
-                =========================================================<br>
-                後期4限の信号処理で使う「ディジタル信号処理のエッセンス」譲れます！<br>
-                連絡はTwitter@BasyaKuEまで！！！<br>
-                =========================================================<br>
-                連絡先の書き込みを忘れないでください。ただし公開してもよい連絡先にしてください。<br>
-            </p>
-            <p>
-                <b>注意</b><br>
-                ここでの取引によって生じたトラブル（金銭等）に関して当サービスおよび管理者は責任をいっさい負いかねます。
-            </p>
+        <div class="mt-4">
+            {{form.message}}
         </div>
-        <div class="ui segment">
-            <div class="content">
-                <div class="header"><h3>新着トピック &nbsp; <a href="./create_topic/">新規投稿</a></h3></div>
+
+
+
+        {% for error in form.errors%}
+            <p style="color: red;">{{error}}</p>
+        {% endfor%}
+        <div class="text-center" style="margin-top:10px;">
+            <button class="btn btn-outline-primary " style="width:30%;" type="submit" name="next" value="confirm">作成</button>
+        </div>
+
+    </form>
+</div>
+
+        <br>
+        <h4 class="text-center">投稿一覧</h4>
+        <br>
+        {% if posts %}
+        {% for post in posts %}
+            <div class="card" style="padding:0;">
+                <div class="card-header">
+
+                    <div class="row" style="margin:auto;">
+                        <h6 class="col-7">
+                            <a href="./{{post.id}}/">
+                                {{ post.title }}
+                            </a>
+                            ({{post.category}}) :
+                            <a   href="{% url 'accounts:profile' %}">{{ post.user_name }}</a>
+                        </h6>
+                        <p class="col-5 text-right">{{ post.created}}</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if post.pub_flg %}
+                    <p　class="card-text">{{post.message | comment_filter | safe}}</p>
+                    <div class="vote_button text-right" style="cursor: pointer;"
+                    data-comment-id="{{post.id}}" data-count="{{post.vote_count}}">
+                        <i class="far fa-heart"></i>
+                        <span class="vote_counter">
+                        {% if post.vote_count >= 0 %}
+                            {{post.vote_count}}
+                        {% endif %}
+                        </span>
+                    </div>
+                    {% else %}
+                        <p style="color: grey">コメントは非表示とされました</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="ui warning message"><p>まだコメントはありません</p></div>
+        {% endif %}
+        <!--//コメント投稿-->
                 <div class="ui divided items">
                     {% for topic in topic_list %}
                     <div class="item">
@@ -48,12 +102,9 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="toIndex">
-    <a href="{% url 'cissapp:index' %}">ホーム</a>
-</div>
+
 </body>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/vote.js' %}" type="text/javascript"></script>
 {% endblock %}
