@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from . models import Topic2, Category, Comment
 
+# unused
 class TopicCreateForm(ModelForm):
     class Meta:
         model=Topic2
@@ -10,6 +11,24 @@ class TopicCreateForm(ModelForm):
             'category',
             'message',
         ]
+
+        widgets = {
+            'message': forms.Textarea(
+                    attrs={
+                        'rows':4, 'cols':7,
+                        'placeholder': '本文だお'
+                        }
+                    )
+        }
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super().__init__(*args, **kwargs)
+
+        self.fields['category'].empty_label = '選択して下さい'
+
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
 
 class TopicModelForm(forms.ModelForm):
     class Meta:

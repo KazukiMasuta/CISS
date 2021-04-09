@@ -67,6 +67,7 @@ class noclassTopicCreateForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['author'].widget.attrs['value'] = '匿名'
 
+
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super().get_form_kwargs()
         return kwargs

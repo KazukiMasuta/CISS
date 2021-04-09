@@ -5,11 +5,15 @@ from django.views.generic import TemplateView, ListView, CreateView, FormView, D
 from . forms import TopicModelForm, TopicForm, TopicCreateForm, CommentModelForm
 from .models import Topic3, Comment3
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+@login_required
 def top(request):
     ctx = {'title': '物々交換'}
     return render(request, 'trade/top.html', ctx)
 
-class TopView(TemplateView):
+class TopView(TemplateView,LoginRequiredMixin):
     template_name = 'trade/top.html'
 
     def get_context_data(self, **kwargs):
@@ -17,17 +21,17 @@ class TopView(TemplateView):
         ctx['title'] = 'サークルのページ'
         return ctx
     
-class TopicListView(ListView):
+class TopicListView(ListView,LoginRequiredMixin):
     template_name = 'trade/top.html'
     queryset = Topic3.objects.order_by('-created')
     context_object_name = 'topic_list'
 
-class TopicDetailView(DetailView):
+class TopicDetailView(DetailView,LoginRequiredMixin):
     template_name = 'trade/detail_topic.html'
     model = Topic3
     context_object_name = 'topic'
 
-class TopicFormView(FormView):
+class TopicFormView(FormView,LoginRequiredMixin):
     template_name = 'trade/create_topic.html'
     form_class = TopicCreateForm
     success_url = reverse_lazy('trade:top')
@@ -37,6 +41,7 @@ class TopicFormView(FormView):
         form.save()
         return super().form_valid(form)
 
+@login_required
 def topic_create(request):
     template_name = 'trade/create_topic.html'
     ctx = {}
@@ -53,7 +58,7 @@ def topic_create(request):
             ctx['form'] = topic_form
             return render(request, template_name, ctx)
 
-class TopicCreateView(CreateView):
+class TopicCreateView(CreateView,LoginRequiredMixin):
     template_name = 'trade/create_topic.html'
     form_class = TopicCreateForm
     model = Topic3
@@ -72,7 +77,7 @@ class TopicCreateView(CreateView):
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
             return redirect(reverse_lazy('club:top'))
 
-class TopicAndCommentView(FormView):
+class TopicAndCommentView(FormView,LoginRequiredMixin):
     template_name = 'trade/detail_topic.html'
     form_class = CommentModelForm
     
@@ -88,6 +93,6 @@ class TopicAndCommentView(FormView):
     def get_context_data(self):
         ctx = super().get_context_data()
         ctx['topic'] = Topic3.objects.get(id=self.kwargs['pk'])
-        ctx['comment_list'] = Comment.objects.filter(
+        ctx['comment_list'] = Comment3.objects.filter(
                 topic_id=self.kwargs['pk']).order_by('no')
         return ctx

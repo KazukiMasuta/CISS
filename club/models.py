@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import User
 
 class TopicManager(models.Manager):
     # Topic操作に関する処理を追加
@@ -36,8 +36,10 @@ class Category(models.Model):
 
 class Topic2(models.Model):
     user_name = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     title = models.CharField(
         'タイトル',
@@ -60,6 +62,9 @@ class Topic2(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
     )
+    pub_flg = models.BooleanField(
+        default=True,
+    )
     modified = models.DateTimeField(
         auto_now=True,
     )
@@ -76,8 +81,10 @@ class Comment(models.Model):
         default=0,
     )
     user_name = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     topic = models.ForeignKey(
         Topic2,
@@ -96,3 +103,32 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{}-{}'.format(self.topic.id, self.no)
+
+
+class VoteManager(models.Manager):
+    def create_vote(self, ip_address, comment_id):
+        vote = self.model(
+            ip_address=ip_address,
+            comment_id = comment_id
+        )
+        try:
+            vote.save()
+        except:
+            return False
+        return True
+
+class Vote(models.Model):
+    topic = models.ForeignKey(
+        Topic2,
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    ip_address = models.CharField(
+        'IPアドレス',
+        max_length=50,
+    )
+
+    objects = VoteManager()
+
+    def __str__(self):
+        return '{}-{}'.format(self.topic.title, self.topic.no)

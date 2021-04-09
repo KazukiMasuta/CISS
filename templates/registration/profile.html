@@ -2,26 +2,41 @@
 {% extends 'cissapp/layout.html' %}
 
 {% block content %}
-<div class="ui grid stackable">
-    <div class="eleven wide column">
-        <div class="ui breadcrumb">
-            <a href="{% url 'cissapp:index' %}" class="section">TOP</a>
-            <i class="right angle icon divider"></i>
-            <a class="active section">ユーザー情報</a>
+<br>
+<h3 class="text-center">アカウント情報</h3>
+<br>
+<div class="col-md-12">
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <h6 class="mb-0">ログインID</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            {{user.username}}
+          </div>
+
         </div>
-        <div class="ui segment">
-            <div class="content">
-                <div class="header"><h3>ユーザー情報</h3></div>
-                <div class="ui divided bulleted list">
-                    <div class="item">ログインID：{{user.username}}</div>
-                    <div class="item">E-mail：{% if user.email %}{{user.email}}{% else %}未設定{% endif %}</div>
-                    <div class="item">名字：{% if user.last_name %}{{user.last_name}}{% else %}未設定{% endif %}</div>
-                    <div class="item">名前：{% if user.first_name %}{{user.first_name}}{% else %}未設定{% endif %}</div>
-                </div>
-            </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <h6 class="mb-0">Email</h6>
+          </div>
+          <div class="col-sm-7 text-secondary">
+            {% if user.email %}{{user.email}}{% else %}未設定{% endif %}
+          </div>
+          <div class="col-sm-2">
+            <a class="btn btn-outline-primary" href="{% url 'accounts:change' %}" role="button">編集</a>
+          </div>
         </div>
-        <a class="ui button" href="">登録情報変更</a>
-        <a class="ui button" href="{% url 'password_change' %}">パスワード変更</a>
+      </div>
     </div>
+    <div class="text-right">
+        <a class="btn btn-outline-info text-right" href="{% url 'password_change' %}">パスワード変更</a>
+    </div>
+
+
+
+
 </div>
 {% endblock %}
