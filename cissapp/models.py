@@ -5,14 +5,14 @@ from accounts.models import User
 
 
 class Data(models.Model):
-    category = models.CharField("科目種別", blank=True, null=True, max_length=225)
-    no = models.CharField("授業番号", blank=True, null=True, max_length=225)
-    semester = models.CharField("学期", blank=True, null=True, max_length=225)
-    day = models.CharField("曜日", blank=True, null=True, max_length=225)
-    name = models.CharField("科目", blank=True, null=True, max_length=225)
-    period = models.CharField("時限", blank=True, null=True, max_length=225)
-    teacher = models.CharField("担当教員", blank=True, null=True, max_length=225)
-    credit = models.CharField("単位", blank=True, null=True, max_length=225)
+    category = models.CharField("科目種別", blank=True, max_length=100)
+    no = models.CharField("授業番号", blank=True, max_length=10)
+    semester = models.CharField("学期", blank=True, max_length=5)
+    day = models.CharField("曜日", blank=True, max_length=1)
+    name = models.CharField("科目", blank=True, max_length=20)
+    period = models.CharField("時限", blank=True, max_length=2)
+    teacher = models.CharField("担当教員", blank=True, max_length=30)
+    credit = models.CharField("単位", blank=True, max_length=1)
 
     class Meta:
         verbose_name = '授業'
