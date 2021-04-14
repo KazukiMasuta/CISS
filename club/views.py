@@ -36,9 +36,6 @@ class ClubTopicView(FormView,LoginRequiredMixin):
     success_url = reverse_lazy('club:top')
 
 
-    comment = Comment.objects.count()
-    print(comment)
-
     def form_valid(self, form):
         form.instance.user_name = self.request.user
         ctx = {'form': form}
@@ -52,9 +49,10 @@ class ClubTopicView(FormView,LoginRequiredMixin):
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
             return redirect(reverse_lazy('club:top'))
 
-    def Comments(self, pk):
+    """def Comments(self, pk):
         comment = get_object_or_404(Comment, pk=pk)
-        comtCount = comment.objects.annotate(replies=Count('no'))
+        comtCount = comment.objects.annotate(replies=Count('no'))"
+    """
 
 
     def get_context_data(self):
