@@ -118,13 +118,13 @@ class CustomUserCreationForm(UserCreationForm):
     def clean(self):
         cleaned_data=super().clean()
         email = cleaned_data.get("email")
-        m = re.search('hokudai.ac.jp$',email)
+        m = re.search('ed.tmu.ac.jp$',email)
         if m is None:
-            self._errors["email"]=["登録に使えるのはhokudai.ac.jpを持つメールアドレスのみです。"]
+            self._errors["email"]=["登録に使えるのはed.tmu.ac.jpを持つメールアドレスのみです。"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['email'].help_text= "登録に使えるのはhokudai.ac.jpを持つメールアドレスのみです。"
+        self.fields['email'].help_text= "登録に使えるのはed.tmu.ac.jpを持つメールアドレスのみです。"
 
 class EmailAuthenticationForm(Form):
     """
