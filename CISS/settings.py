@@ -22,10 +22,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'hiv6*!i=apr-fcaxpahnt!*!(up^&2r)p57z0=d$t*pk6*izv@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# デバッグモードを有効にするかどうか(本番運用では必ずFalseにする)
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+# 許可するホスト名のリスト
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
+
+# 静的ファイルを配置する場所
+STATIC_ROOT = '/usr/share/nginx/html/static'
+MEDIA_ROOT = '/usr/share/nginx/html/media'
+
+# Amazon SES関連設定
+AWS_SES_ACCESS_KEY_ID = os.environ.get('AWS_SES_ACCESS_KEY_ID')
+AWS_SES_SECRET_ACCESS_KEY = os.environ.get('AWS_SES_SECRET_ACCESS_KEY')
+EMAIL_BACKEND = 'django_ses.SESBackend'
 
 
 # Application definition
@@ -45,7 +55,10 @@ INSTALLED_APPS = [
     'club',
     'trade',
     'django_static_md5url',
+
 ]
+
+
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
@@ -89,8 +102,10 @@ WSGI_APPLICATION = 'CISS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'private_diary',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
