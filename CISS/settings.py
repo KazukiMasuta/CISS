@@ -27,6 +27,7 @@ DEBUG = False
 
 # 許可するホスト名のリスト
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
+#ALLOWED_HOSTS = ['*']
 
 # 静的ファイルを配置する場所
 STATIC_ROOT = '/usr/share/nginx/html/static'
@@ -103,7 +104,13 @@ WSGI_APPLICATION = 'CISS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+<<<<<<< HEAD
         'NAME': 'private_diary',
+=======
+        'NAME': 'ciss',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+>>>>>>> 2713785b77c69de2b5ba079bec7bd8a887c3b3f5
         'HOST': '',
         'PORT': '',
     }
