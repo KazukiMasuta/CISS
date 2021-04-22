@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from cissapp.views import DetailView, IndexView, upload, TopicDetailView,FirstView
+from cissapp.views import DetailView, IndexView, upload, TopicDetailView,FirstView #TopicCreateView
 
 from . import views
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('<int:pk>/', views.TopicDetailView.as_view(), name='detail'),
     path('upload/', views.upload, name='upload'),
+    #path('<int:pk>/create/', views.TopicCreateView.as_view(), name='create'), # これでいけんじゃね？？？？
 ]

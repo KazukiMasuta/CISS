@@ -16,7 +16,7 @@ class TopicCreateForm(ModelForm):
             'message': forms.Textarea(
                     attrs={
                         'rows':4, 'cols':7,
-                        'placeholder': '本文だお'
+                        'placeholder': '本文を入力してください'
                         }
                     )
         }

@@ -63,6 +63,7 @@ class TopicFormView(FormView):
             return render(self.request, 'topics/create_class_topic.html', ctx)
         if self.request.POST.get('next', '') == 'create':
             form.save()
+            #form.save_with_data(data_id = )
             return super().form_valid(form)
         else:
             return redirect(reverse_lazy('cissapp:index'))
@@ -80,18 +81,20 @@ class noclassTopicFormView(FormView):
             return render(self.request, 'topics/create_other_topic.html', ctx)
         if self.request.POST.get('next', '') == 'create':
 
-            form.save_with_data(data_id = 5020)
+            form.save_with_data(data_id = 5705)
             return super().form_valid(form)
         else:
             return redirect(reverse_lazy('cissapp:index'))
 
     def get_success_url(self):
-        return reverse_lazy('cissapp:detail', kwargs={'pk': 5020})
+        return reverse_lazy('cissapp:detail', kwargs={'pk': 5705})
 
 
 class SubjectView(ListView):
     template_name = 'topics/subject.html'
     context_object_name = 'topic_list'
+
+    
 
     def get_queryset(self):
         return Data.objects.filter(name = self.kwargs['name'])

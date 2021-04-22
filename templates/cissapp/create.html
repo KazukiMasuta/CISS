@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'cissapp/layout.html' %}
+{% load static %}
+{% load topicsfilters %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="ja">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <title>トピック作成</title>
+</head>
+{% block content %}
+        <form class="border" style="padding:20px;">
+            <h4 class="text-center">新規投稿</h4>
+            <div class="form-group">
+                <form class="" action="{% url 'cissapp:create' %}" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-outline-primary " name="next" value="confirm" style="width:30%;">作成</button>
+                    </div>
+
+                </form>
+            </div>
+        </form>
+{% endblock %}

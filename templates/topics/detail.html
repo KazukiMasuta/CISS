@@ -43,19 +43,20 @@
 
         <!--コメント投稿-->
 
+
         <form class="border" style="padding:20px;">
             <h4 class="text-center">新規投稿</h4>
             <div class="form-group">
-                <form class="ui form" action="" method="POST">
+                <form class="" action="{% url 'topics:create_topic' %}" method="POST">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div class="text-center">
-                        <button class="btn btn-outline-primary" style="width:30%;" type="submit" >作成</button>
+                        <button type="submit" class="btn btn-outline-primary " name="next" value="confirm" style="width:30%;">作成</button>
                     </div>
+
                 </form>
             </div>
         </form>
-
         <!--//コメント投稿-->
         <!--コメント表示-->
         <br>
@@ -91,7 +92,7 @@
         {% else %}
             <div class="ui warning message"><p>まだコメントはありません</p></div>
         {% endif %}
-        <!--
+        <!----
         <div class="ui segment">
             {% if posts %}
             {% for post in posts %}

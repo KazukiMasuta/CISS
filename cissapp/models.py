@@ -46,7 +46,6 @@ class Topic(models.Model):
         Data,
         on_delete=models.PROTECT,
     )
-
     title = models.CharField(
         'タイトル',
         max_length=30,
@@ -64,17 +63,11 @@ class Topic(models.Model):
         null=True,
         blank=True,
     )
-    time = models.DateTimeField(
-        default=timezone.now
-    )
     created = models.DateTimeField(
         auto_now_add=True,
     )
     pub_flg = models.BooleanField(
         default=True,
-    )
-    modified = models.DateTimeField(
-        auto_now=True,
     )
     objects = TopicManager()
 

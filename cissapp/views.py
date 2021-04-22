@@ -18,6 +18,8 @@ from topics.forms import TopicCreateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+#from .forms import TopicCreateForm
+
 class FirstView(ListView,LoginRequiredMixin):
     model = Topic
     template_name = 'cissapp/first.html'
@@ -45,11 +47,15 @@ class IndexView(ListView,LoginRequiredMixin):
     queryset = Topic.objects.order_by('-created')[:10]
     context_object_name = 'topic_list'
 
+"""
 class TopicDetailView(FormView,LoginRequiredMixin):
     template_name = 'cissapp/detail.html'
     form_class = TopicCreateForm
+    model = Topic
+    print("TopicDetail")
 
     def form_valid(self, form):
+        print("go")
         form.instance.author = self.request.user
         ctx = {'form': form}
         if self.request.POST.get('next', '') == 'confirm':
@@ -57,13 +63,13 @@ class TopicDetailView(FormView,LoginRequiredMixin):
         if self.request.POST.get('next', '') == 'back':
             return render(self.request, 'topics/create_other_topic.html', ctx)
         if self.request.POST.get('next', '') == 'create':
-
             form.save_with_data(self.kwargs.get('pk'))
             return super().form_valid(form)
         else:
             return redirect(reverse_lazy('cissapp:index'))
 
     def get_success_url(self):
+        print("in get_seccess_url")
         return reverse_lazy('cissapp:detail', kwargs={'pk': self.kwargs['pk']})
 
     def get_context_data(self):
@@ -73,11 +79,34 @@ class TopicDetailView(FormView,LoginRequiredMixin):
         print('完了3-2')
         #ctx['posts'] = Data.objects.filter(data_id=self.kwargs['pk']).order_by('no')
         #ctx['posts'] = Topic.objects.filter(data = self.kwargs['pk']).order_by('-created')
-        ctx['posts'] = Topic.objects.filter(
-            data=self.kwargs['pk']).annotate(vote_count=Count('vote')).order_by('-created')
+        ctx['posts'] = Topic.objects.filter(data=self.kwargs['pk']).annotate(vote_count=Count('vote')).order_by('-created')
         print('完了3-3')
+        print(ctx)
+        return ctx
+"""
+
+
+#class TopicCreateView(FormView):
+class TopicDetailView(FormView,LoginRequiredMixin):
+    #template_name = "cissapp/create.html"
+    template_name = "cissapp/detail.html"
+    form_class = TopicCreateForm
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.save_with_data(self.kwargs.get('pk'))
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('cissapp:detail', kwargs={'pk': self.kwargs['pk']})
+
+    def get_context_data(self):
+        ctx = super().get_context_data()
+        ctx['data'] = Data.objects.get(id=self.kwargs['pk'])
+        ctx['posts'] = Topic.objects.filter(data_id=self.kwargs['pk']).order_by('no')
         return ctx
 
+@login_required
 def upload(request):
     if 'csv' in request.FILES:
         form_data = TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')

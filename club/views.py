@@ -15,6 +15,7 @@ def top(request):
     return render(request, 'club/top.html', ctx)
 
 #unused
+"""
 class TopView(TemplateView,LoginRequiredMixin):
     template_name = 'club/top.html'
 
@@ -22,12 +23,15 @@ class TopView(TemplateView,LoginRequiredMixin):
         ctx = super().get_context_data(**kwargs)
         ctx['title'] = 'サークルのページ'
         return ctx
+"""
 
 #unused
+"""
 class TopicListView(ListView,LoginRequiredMixin):
     template_name = 'club/top.html'
     queryset = Topic2.objects.order_by('-created')
     context_object_name = 'topic_list'
+"""
 
 class ClubTopicView(FormView,LoginRequiredMixin):
     template_name = 'club/top.html'
@@ -37,6 +41,7 @@ class ClubTopicView(FormView,LoginRequiredMixin):
 
 
     def form_valid(self, form):
+        print("club form_valid")
         form.instance.user_name = self.request.user
         ctx = {'form': form}
         if self.request.POST.get('next', '') == 'confirm':
@@ -57,12 +62,12 @@ class ClubTopicView(FormView,LoginRequiredMixin):
 
     def get_context_data(self):
         ctx = super().get_context_data()
-        print('完了3-1')
-        print('完了3-2')
+        print('club 完了3-1')
+        print('club 完了3-2')
         #ctx['posts'] = Data.objects.filter(data_id=self.kwargs['pk']).order_by('no')
         #ctx['posts'] = Topic.objects.filter(data = self.kwargs['pk']).order_by('-created')
         ctx['posts'] = Topic2.objects.annotate(vote_count=Count('vote')).order_by('-created')
-        print('完了3-3')
+        print('club 完了3-3')
         return ctx
 
 
@@ -99,6 +104,8 @@ class TopicFormView(FormView,LoginRequiredMixin):
         return super().form_valid(form)
 
 #@login_required
+# こっちがunusedです
+"""
 def topic_create(request):
     template_name = 'club/create_topic.html'
     ctx = {}
@@ -114,7 +121,9 @@ def topic_create(request):
         else:
             ctx['form'] = topic_form
             return render(request, template_name, ctx)
-# unused
+"""
+
+# unusedじゃないです。
 class TopicCreateView(CreateView,LoginRequiredMixin):
     template_name = 'club/create_topic.html'
     form_class = TopicCreateForm
@@ -133,6 +142,7 @@ class TopicCreateView(CreateView,LoginRequiredMixin):
         else:
             # 正常動作ではここは通らない。エラーページへの遷移でも良い
             return redirect(reverse_lazy('club:top'))
+
 
 class CategoryView(ListView,LoginRequiredMixin):
     template_name = 'club/category.html'
