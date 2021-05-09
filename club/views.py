@@ -23,13 +23,8 @@ class TopView(TemplateView,LoginRequiredMixin):
         ctx['title'] = 'サークルのページ'
         return ctx
 
-#unused
-class TopicListView(ListView,LoginRequiredMixin):
-    template_name = 'club/top.html'
-    queryset = Topic2.objects.order_by('-created')
-    context_object_name = 'topic_list'
 
-class ClubTopicView(FormView,LoginRequiredMixin):
+class ClubTopicView(CreateView,LoginRequiredMixin):
     template_name = 'club/top.html'
     model = Topic2
     form_class = TopicCreateForm
@@ -42,7 +37,7 @@ class ClubTopicView(FormView,LoginRequiredMixin):
         if self.request.POST.get('next', '') == 'confirm':
             return render(self.request, 'club/confirm_topic.html', ctx)
         if self.request.POST.get('next', '') == 'back':
-            return render(self.request, 'club/create_topic.html', ctx)
+            return render(self.request, 'club/top.html', ctx)
         if self.request.POST.get('next', '') == 'create':
             return super().form_valid(form)
         else:
@@ -65,38 +60,11 @@ class ClubTopicView(FormView,LoginRequiredMixin):
         print('完了3-3')
         return ctx
 
-
-"""
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        ctx = {'form': form}
-        if self.request.POST.get('next', '') == 'confirm':
-            return render(self.request, 'topics/confirm_topic.html', ctx)
-        if self.request.POST.get('next', '') == 'back':
-            return render(self.request, 'topics/create_other_topic.html', ctx)
-        if self.request.POST.get('next', '') == 'create':
-
-            form.save_with_data(self.kwargs.get('pk'))
-            return super().form_valid(form)
-        else:
-            return redirect(reverse_lazy('cissapp:index'))
-"""
-
-
 class TopicDetailView(DetailView,LoginRequiredMixin):
     template_name = 'club/detail_topic.html'
     model = Topic2
     context_object_name = 'topic'
 
-class TopicFormView(FormView,LoginRequiredMixin):
-    template_name = 'club/create_topic.html'
-    form_class = TopicCreateForm
-    success_url = reverse_lazy('club:top')
-
-    def form_valid(self, form):
-        form.instance.user_name = self.request.user
-        form.save()
-        return super().form_valid(form)
 
 #@login_required
 def topic_create(request):
@@ -114,25 +82,6 @@ def topic_create(request):
         else:
             ctx['form'] = topic_form
             return render(request, template_name, ctx)
-# unused
-class TopicCreateView(CreateView,LoginRequiredMixin):
-    template_name = 'club/create_topic.html'
-    form_class = TopicCreateForm
-    model = Topic2
-    success_url = reverse_lazy('club:top')
-
-    def form_valid(self, form):
-        form.instance.user_name = self.request.user
-        ctx = {'form': form}
-        if self.request.POST.get('next', '') == 'confirm':
-            return render(self.request, 'club/confirm_topic.html', ctx)
-        if self.request.POST.get('next', '') == 'back':
-            return render(self.request, 'club/create_topic.html', ctx)
-        if self.request.POST.get('next', '') == 'create':
-            return super().form_valid(form)
-        else:
-            # 正常動作ではここは通らない。エラーページへの遷移でも良い
-            return redirect(reverse_lazy('club:top'))
 
 class CategoryView(ListView,LoginRequiredMixin):
     template_name = 'club/category.html'

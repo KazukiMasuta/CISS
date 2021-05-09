@@ -31,3 +31,7 @@ detail.html -58 jsが反応しない
 
 ・投稿一覧でいいねの横にコメント数を表示させたい
 ・tradeの調整
+
+## 4/21
+授業投稿のviewsとdetailをtopicsに移した
+topics/の後に授業番号（daya_id)をurlに持ってこないとsavewithdata関数が動かない

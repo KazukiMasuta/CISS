@@ -18,10 +18,6 @@ from topics.forms import TopicCreateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-class FirstView(ListView,LoginRequiredMixin):
-    model = Topic
-    template_name = 'cissapp/first.html'
-
 @login_required
 def search(request):
     query = request.GET.get('q')
@@ -45,9 +41,12 @@ class IndexView(ListView,LoginRequiredMixin):
     queryset = Topic.objects.order_by('-created')[:10]
     context_object_name = 'topic_list'
 
+
 class TopicDetailView(FormView,LoginRequiredMixin):
     template_name = 'cissapp/detail.html'
     form_class = TopicCreateForm
+    model = Topic
+    success_url = reverse_lazy('cisapp:index')
 
     def form_valid(self, form):
         form.instance.author = self.request.user

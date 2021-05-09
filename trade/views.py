@@ -29,7 +29,8 @@ class TopicListView(ListView,LoginRequiredMixin):
     queryset = Topic3.objects.order_by('-created')
     context_object_name = 'topic_list'
 
-class TradeTopicView(FormView,LoginRequiredMixin):
+
+class TradeTopicView(CreateView,LoginRequiredMixin):
     template_name = 'trade/top.html'
     model = Topic3
     form_class = TopicCreateForm
@@ -43,7 +44,7 @@ class TradeTopicView(FormView,LoginRequiredMixin):
         if self.request.POST.get('next', '') == 'confirm':
             return render(self.request, 'trade/confirm_topic.html', ctx)
         if self.request.POST.get('next', '') == 'back':
-            return render(self.request, 'trade/create_topic.html', ctx)
+            return render(self.request, 'trade/top.html', ctx)
         if self.request.POST.get('next', '') == 'create':
             return super().form_valid(form)
         else:

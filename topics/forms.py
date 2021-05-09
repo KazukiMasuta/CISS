@@ -24,6 +24,15 @@ class TopicCreateForm(ModelForm):
             'author',
         ]
 
+        widgets = {
+            'content': forms.Textarea(
+                    attrs={
+                        'rows':4, 'cols':7,
+                        'placeholder': '本文だお'
+                        }
+                    )
+        }
+
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
@@ -38,6 +47,7 @@ class TopicCreateForm(ModelForm):
     def save_with_data(self, data_id, commit=True):
         topic = self.save(commit=False)
         topic.data = Data.objects.get(id=data_id)
+        print(data_id)
         #なんでここ .topic なの？ -> dataにしたら治った
         topic.no = Topic.objects.filter(data_id=data_id).count() + 1
         print('以下デバック-----------')

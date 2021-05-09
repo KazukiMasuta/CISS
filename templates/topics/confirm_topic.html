@@ -1,92 +1,50 @@
 {% extends 'cissapp/layout.html' %}
 
 {% block content %}
-<div class="ui grid stackable">
-    <div class="eleven wide column">
-        <div class="ui breadcrumb">
-            <a href="{% url 'cissapp:index' %}" class="section">TOP</a>
-            <i class="right angle icon divider"></i>
-            <a class="active section">内容確認</a>
-        </div>
-        <div class="ui segment">
-            <div class="content">
-                <div class="header"><h3>内容確認</h3></div>
-                <p>内容を確認してください</p>
-                <table  class="ui celled table table table-hover" >
-                    <tr><td>科目</td><td>{{form.title.value}}</td></tr>
-                    <tr><td>お名前</td><td>{{form.author.value}}</td></tr>
+<div class="col-md-12 border">
+    <h4 class="text-center m-5">内容を確認してください</h4>
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <h6 class="mb-0">タイトル</h6>
+          </div>
+          <div class="col-sm-8 text-secondary">
+            {{form.title.value}}
+          </div>
 
-                    <tr><td>本文</td><td><pre>{{form.content.value}}</pre></td></tr>
-                </table>
-                <form class="ui form" action="" method="POST">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        {{field.as_hidden}}
-                    {% endfor %}
-                    <button class="ui button grey" type="submit" name="next" value="back">戻る</button>
-                    <button class="ui button orange" type="submit" name="next" value="create">作成</button>
-                </form>
-            </div>
         </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+              <h6 class="mb-0">本文</h6>
+            </div>
+            <div class="col-sm-8 text-secondary">
+                {{form.content.value}}
+            </div>
+
+        </div>
+
+
+      </div>
     </div>
+    <form class="form-group " action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            {{field.as_hidden}}
+        {% endfor %}
+        <div class="row my-5">
+            <button class="btn btn-outline-primary col mx-5" type="submit" name="next" value="back">戻る</button>
+            <button class="btn btn-outline-success col mx-5" type="submit" name="next" value="create">作成</button>
+        </div>
+
+    </form>
+
+
+
 
 </div>
 
-<br>
 
-
-
-            <div class="col-md-12 border">
-                <h4 class="text-center m-5">内容を確認してください</h4>
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-4">
-                        <h6 class="mb-0">科目</h6>
-                      </div>
-                      <div class="col-sm-8 text-secondary">
-                        {{form.title.value}}
-                      </div>
-
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-4">
-                          <h6 class="mb-0">お名前</h6>
-                        </div>
-                        <div class="col-sm-8 text-secondary">
-                            {{form.author.value}}
-                        </div>
-
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-4">
-                          <h6 class="mb-0">本文</h6>
-                        </div>
-                        <div class="col-sm-8 text-secondary">
-                            {form.content.value}}
-                        </div>
-
-                    </div>
-
-
-                  </div>
-                </div>
-                <form class="form-group " action="" method="POST">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        {{field.as_hidden}}
-                    {% endfor %}
-                    <div class="row my-5">
-                        <button class="btn btn-outline-primary col mx-5" type="submit" name="next" value="back">戻る</button>
-                        <button class="btn btn-outline-success col mx-5" type="submit" name="next" value="create">作成</button>
-                    </div>
-
-                </form>
-
-
-
-
-            </div>
 {% endblock %}

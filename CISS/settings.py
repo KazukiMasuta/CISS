@@ -23,11 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'hiv6*!i=apr-fcaxpahnt!*!(up^&2r)p57z0=d$t*pk6*izv@'
 
 # デバッグモードを有効にするかどうか(本番運用では必ずFalseにする)
-DEBUG = False
+DEBUG = True
 
 # 許可するホスト名のリスト
-ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
-#ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = ['*']
 
 # 静的ファイルを配置する場所
 STATIC_ROOT = '/usr/share/nginx/html/static'
@@ -101,18 +101,23 @@ WSGI_APPLICATION = 'CISS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-<<<<<<< HEAD
-        'NAME': 'private_diary',
-=======
         'NAME': 'ciss',
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
->>>>>>> 2713785b77c69de2b5ba079bec7bd8a887c3b3f5
         'HOST': '',
         'PORT': '',
+    }
+}
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
