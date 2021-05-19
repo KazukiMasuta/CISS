@@ -115,6 +115,21 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ('username', 'email')
 
+        widgets = {
+            'username': forms.Textarea(
+                    attrs={
+                        'rows':1, 'cols':7,
+                        'placeholder': 'Name'
+                        }
+                    ),
+            'email': forms.Textarea(
+                    attrs={
+                        'rows':1, 'cols':7,
+                        'placeholder': 'Email of TMU'
+                        }
+                    ),
+        }
+
     def clean(self):
         cleaned_data=super().clean()
         email = cleaned_data.get("email")
@@ -125,6 +140,9 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].help_text= "登録に使えるのはed.tmu.ac.jpを持つメールアドレスのみです。"
+
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
 
 class EmailAuthenticationForm(Form):
     """

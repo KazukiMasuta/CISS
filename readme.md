@@ -35,3 +35,7 @@ detail.html -58 jsが反応しない
 ## 4/21
 授業投稿のviewsとdetailをtopicsに移した
 topics/の後に授業番号（daya_id)をurlに持ってこないとsavewithdata関数が動かない
+
+## 5/11
+授業投稿ができるようになった
+その他のちょっとした不具合を直した

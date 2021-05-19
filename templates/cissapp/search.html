@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 {% extends 'cissapp/layout.html' %}
 {% block content %}
+<style>
+.table{
+  width:90%;
+  margin:auto;
+}
 
+</style>
 <br>
 <h3 class="text-center">授業を検索</h3>
 <div class="d-flex justify-content-center">
 
   <form class="form-inline my-2" method="GET" action="{% url 'cissapp:search' %}">
-   <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
-   <button type="submit" value="search" class="btn btn-primary">検索</button>
+    <div class="row">
+      <input type="text" class="col-9 form-control" name="q" value="{{request.GET.q}}">
+      <button type="submit" value="search" class="btn btn-primary col-3">検索</button>
+    </div>
+
   </form>
 </div>
 <div>
@@ -17,35 +26,30 @@
 
   {% endif%}
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>科目種別</th>
-      <th>授業番号</th>
-      <th>学期</th>
-      <th>曜日</th>
-      <th>科目</th>
-      <th>時限</th>
-      <th>担当教員</th>
-      <th>単位</th>
-      <th>投稿一覧</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for class in class_list %}
-    <tr>
-      <td>{{class.category}}</td>
-      <td>{{class.no}}</td>
-      <td>{{class.semester}}</td>
-      <td>{{class.day}}</td>
-      <td>{{class.name}}</td>
-      <td>{{class.period}}</td>
-      <td>{{class.teacher}}</td>
-      <td>{{class.credit}}</td>
-      <td><a href="../topics/{{class.id}}/" class="btn btn-primary">投稿一覧</a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="">
+  <table class="table">
+    <thead>
+      <tr  class="row align-center">
+        <th class="col-1">学期</th>
+        <th class="col-1">曜日</th>
+        <th class="col-1">時限</th>
+        <th class="col-6">科目</th>
+        <th class="col-3">投稿一覧</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for class in class_list %}
+      <tr  class="row">
+        <td class="col-1">{{class.semester}}</td>
+        <td class="col-1">{{class.day}}</td>
+        <td class="col-1">{{class.period}}</td>
+        <td class="col-6">{{class.name}}</td>
+        <td class="col-3"><a href="../topics/{{class.id}}/" class="btn btn-primary">投稿一覧</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
 
 {% endblock %}

@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 {% extends 'cissapp/layout.html' %}
 {% block content %}
-<div class="ui grid stackable">
-    <div class="eleven wide column">
-        <div class="ui breadcrumb">
-            <a href="{% url 'cissapp:index' %}" class="section">TOP</a>
-            <i class="right angle icon divider"></i>
-            <a class="active section">ユーザー作成</a>
-        </div>
-        <div class="ui segment">
-            <div class="content">
-                <div class="header"><h3>ユーザー作成</h3></div>
-                <form class="ui form" action="" method="POST">
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <button class="ui orange button" name="next" value="confirm" type="submit">確認</button>
-                </form>
-            </div>
-        </div>
+<style>
+    form{
+        width: 70%;
+        margin: auto;
+    }
+</style>
+<br>
+<h1 class="text-center">Sign Up</h1>
+<br>
+<form class="" action="" method="POST">
+    <div class="">
+        {% csrf_token %}
+        <p class="">{{ form.username }}</p>
+        <p class="">{{ form.email }}</p>
+        <p class="">{{ form.password1 }}</p>
+        <p class="">{{ form.password1.help_text }}</p>
+        <p class="">{{ form.password2 }}</p>
     </div>
-</div>
+
+
+
+    <button class="btn btn-outline-info" name="next" value="confirm" type="submit">確認</button>
+</form>
+
 {% endblock %}
