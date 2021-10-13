@@ -1,5 +1,5 @@
 from django.db.models import Count, Q
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.views.generic import (
         CreateView, FormView, DetailView, TemplateView, ListView, FormView)
 from django.urls import reverse_lazy
@@ -18,6 +18,7 @@ from topics.forms import TopicCreateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+#授業検索
 @login_required
 def search(request):
     query = request.GET.get('q')
@@ -77,23 +78,28 @@ class TopicDetailView(FormView,LoginRequiredMixin):
         print('完了3-3')
         return ctx
 
+#授業データをcsvファイルからアップデート
 def upload(request):
-    if 'csv' in request.FILES:
-        form_data = TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
-        csv_file = csv.reader(form_data)
-        for line in csv_file:
-            class_data, created = Data.objects.get_or_create(name=line[4])
-            class_data.category = line[0]
-            class_data.no = line[1]
-            class_data.semester = line[2]
-            class_data.day = line[3]
-            class_data.name = line[4]
-            class_data.period = line[5]
-            class_data.teacher = line[6]
-            class_data.credit = line[7]
-            class_data.save()
+    try:
+        if 'csv' in request.FILES:
+            form_data = TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
+            csv_file = csv.reader(form_data)
+            for line in csv_file:
+                class_data, created = Data.objects.get_or_create(name=line[4])
+                class_data.category = line[0]
+                class_data.no = line[1]
+                class_data.semester = line[2]
+                class_data.day = line[3]
+                class_data.name = line[4]
+                class_data.period = line[5]
+                class_data.teacher = line[6]
+                class_data.credit = line[7]
+                class_data.save()
 
-        return render(request, 'cissapp/upload.html')
+            return render(request, 'cissapp/upload.html')
 
-    else:
-        return render(request, 'cissapp/upload.html')
+        else:
+            return render(request, 'cissapp/upload.html')
+    except Exception as e:
+        pass
+        return HttpResponse("")

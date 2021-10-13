@@ -75,11 +75,10 @@
                                 <li class="nav-item "><a class="nav-link hidden-xs" href="{% url 'cissapp:index' %}"><i class="fas fa-home"></i>ホーム</a></li>
                                 <li class="nav-item "><a class="nav-link" href="{% url 'cissapp:search' %}"><i class="fas fa-search fa-x glyphicon"></i>授業を検索</a></li>
                                 <li class="nav-item "><a class="nav-link" href="{% url 'accounts:profile' %}"><i class="fas fa-user-circle fa-x glyphicon"></i>アカウント</a></li>
-                                <li class="nav-item  dropdown" >
-                                    <a class="nav-link dropdown-toggle"  data-toggle="dropdown">
-                                        <i class="fas fa-external-link-alt"></i>
+                                <li class="nav-item " ><a class="nav-link" href="{% url 'cissapp:search' %}"><i class="fas fa-external-link-alt"></i>
                                         投稿する
-                                    </a>
+                                </a>
+                                    <!--
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="{% url 'cissapp:search' %}">
                                             授業に関する投稿
@@ -88,6 +87,7 @@
                                             その他の投稿
                                         </a>
                                     </div>
+                                    -->
                                 </li>
                                                 <!-- ここテキトーに追加したので直しといてくださいm(_ _)m -->
                                 <li class="nav-item ">

@@ -117,25 +117,44 @@ class CustomUserCreationForm(UserCreationForm):
 
         widgets = {
             'username': forms.Textarea(
-                    attrs={
-                        'rows':1, 'cols':7,
-                        'placeholder': 'Name'
-                        }
-                    ),
+                attrs={
+                    'rows':1, 'cols':7,
+                    'placeholder': 'Name'
+                }
+            ),
             'email': forms.Textarea(
-                    attrs={
-                        'rows':1, 'cols':7,
-                        'placeholder': 'Email of TMU'
-                        }
-                    ),
+                attrs={
+                    'rows':1, 'cols':7,
+                    'placeholder': 'Email of TMU'
+                }
+            ),
+            'passwor1':forms.Textarea(
+                attrs={
+                    'rows':1, 'cols':7,
+                    'placeholder': 'password'
+                }
+            ),
+            'passwor2':forms.Textarea(
+                attrs={
+                    'rows':1, 'cols':7,
+                    'placeholder': 'password again'
+                }
+            ),
         }
 
     def clean(self):
         cleaned_data=super().clean()
         email = cleaned_data.get("email")
-        m = re.search('ed.tmu.ac.jp$',email)
-        if m is None:
-            self._errors["email"]=["登録に使えるのはed.tmu.ac.jpを持つメールアドレスのみです。"]
+        try:
+            m = re.search('ed.tmu.ac.jp$',email)
+            print("deback1")
+            if m is None:
+                print("deback2")
+                self.add_error(None, "登録に使えるのはed.tmu.ac.jpを持つメールアドレスのみです。")
+                self._errors["email"]=["登録に使えるのはed.tmu.ac.jpを持つメールアドレスのみです。"]
+        except Exception as e:
+            pass
+            #self.add_error(None, "登録に使えるのはed.tmu.ac.jpを持つメールアドレスのみです。")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -152,11 +171,13 @@ class EmailAuthenticationForm(Form):
         label=_('Email'),
         widget=forms.EmailInput(attrs={'autofocus': True,})
     )
+
     password = forms.CharField(
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput,
     )
+
 
     error_messages = {
         'invalid_login': _(

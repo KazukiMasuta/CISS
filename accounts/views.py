@@ -23,6 +23,7 @@ from .forms import (
 
 # Create your views here.
 
+#新規ユーザー登録
 class UserCreateView(FormView,LoginRequiredMixin):
     # form_class = UserCreationForm
     form_class = CustomUserCreationForm
@@ -47,6 +48,7 @@ class UserCreateView(FormView,LoginRequiredMixin):
         else:
             # 通常このルートは通らない
             return redirect(reverse_lazy('base:top'))
+
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'registration/profile.html'
