@@ -72,7 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware', # Deubg tool bar
+    #'debug_toolbar.middleware.DebugToolbarMiddleware', # Deubg tool bar
 ]
 
 ROOT_URLCONF = 'CISS.urls'
