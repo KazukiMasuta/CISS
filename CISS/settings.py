@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'hiv6*!i=apr-fcaxpahnt!*!(up^&2r)p57z0=d$t*pk6*izv@'
 
 # デバッグモードを有効にするかどうか(本番運用では必ずFalseにする)
-DEBUG = True
+DEBUG = False
 
 # 許可するホスト名のリスト
 #ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
