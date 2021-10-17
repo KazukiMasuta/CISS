@@ -73,8 +73,9 @@
 
                             <ul class="nav navbar-nav">
                                 <li class="nav-item "><a class="nav-link hidden-xs" href="{% url 'cissapp:index' %}"><i class="fas fa-home"></i>ホーム</a></li>
-                                <li class="nav-item "><a class="nav-link" href="{% url 'cissapp:search' %}"><i class="fas fa-search fa-x glyphicon"></i>授業を検索</a></li>
+                                <!--<li class="nav-item "><a class="nav-link" href="{% url 'cissapp:search' %}"><i class="fas fa-search fa-x glyphicon"></i>授業を検索</a></li>-->
                                 <li class="nav-item "><a class="nav-link" href="{% url 'accounts:profile' %}"><i class="fas fa-user-circle fa-x glyphicon"></i>アカウント</a></li>
+                                <!--
                                 <li class="nav-item  dropdown" >
                                     <a class="nav-link dropdown-toggle"  data-toggle="dropdown">
                                         <i class="fas fa-external-link-alt"></i>
@@ -88,6 +89,13 @@
                                             その他の投稿
                                         </a>
                                     </div>
+                                </li>
+                                -->
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'club:search' %}">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        授業の投稿
+                                    </a>
                                 </li>
                                                 <!-- ここテキトーに追加したので直しといてくださいm(_ _)m -->
                                 <li class="nav-item ">
