@@ -15,8 +15,9 @@ from django.template import RequestContext
 
 from topics.forms import TopicCreateForm
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 @login_required
 def search(request):
@@ -77,6 +78,7 @@ class TopicDetailView(FormView,LoginRequiredMixin):
         print('完了3-3')
         return ctx
 
+@permission_required('admin.can_add_log_entry')
 def upload(request):
     if 'csv' in request.FILES:
         form_data = TextIOWrapper(request.FILES['csv'].file, encoding='utf-8')
