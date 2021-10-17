@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'topics',
     'api',
-    #'debug_toolbar',
+    'debug_toolbar',
     'club',
     'trade',
     'django_static_md5url',
