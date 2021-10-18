@@ -7,7 +7,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/761773b236.js" crossorigin="anonymous"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PGYBGM1046"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
+            gtag('config', 'G-PGYBGM1046');
+        </script>
 
         <style>
         a{
@@ -83,8 +91,8 @@
                                         <a class="dropdown-item" href="{% url 'cissapp:search' %}">
                                             授業に関する投稿
                                         </a>
-                                        <a class="dropdown-item" href="./5020/">
-                                            その他の投稿
+                                        <a class="dropdown-item" href="#">
+                                            その他の投稿（未実装）
                                         </a>
                                     </div>
                                     -->
@@ -96,13 +104,14 @@
                                         部活・サークル等
                                     </a>
                                 </li>
+                                <!--
                                 <li class="nav-item ">
                                     <a class="nav-link" href="{% url 'trade:top' %}">
                                         <i class="fas fa-book"></i>
                                         物々交換板
-
                                     </a>
                                 </li>
+                                -->
                             </ul>
                         </nav>
                     </div>
@@ -141,7 +150,7 @@
                                     <a class="nav-link dropdown-toggle"  data-toggle="dropdown"><i class="fas fa-external-link-alt"></i></a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="{% url 'cissapp:search' %}">授業に関する投稿</a>
-                                        <a class="dropdown-item" href="./5020/">その他の投稿</a>
+                                        <a class="dropdown-item" href="#">その他の投稿（未実装）</a>
                                     </div>
                                 </li>
                                 <li class="nav-item col">
@@ -149,13 +158,13 @@
                                         <i class="fas fa-futbol"></i>
                                     </a>
                                 </li>
+                                <!--
                                 <li class="nav-item col">
                                     <a class="nav-link" href="{% url 'trade:top' %}">
                                         <i class="fas fa-book"></i>
                                     </a>
                                 </li>
-
-
+                                -->
                             </ul>
                         </nav>
 

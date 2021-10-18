@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'hiv6*!i=apr-fcaxpahnt!*!(up^&2r)p57z0=d$t*pk6*izv@'
 
 # デバッグモードを有効にするかどうか(本番運用では必ずFalseにする)
-DEBUG = False
+DEBUG = True
 
 # 許可するホスト名のリスト
 #ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'CISS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -112,15 +112,15 @@ DATABASES = {
         'PORT': '',
     }
 }
-"""
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -173,22 +173,4 @@ AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailAuthBackend',
-]
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS': {
-            'min_length': 8,
-        }
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
 ]

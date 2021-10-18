@@ -15,8 +15,9 @@ from django.template import RequestContext
 
 from topics.forms import TopicCreateForm
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 #授業検索
 @login_required
@@ -78,7 +79,10 @@ class TopicDetailView(FormView,LoginRequiredMixin):
         print('完了3-3')
         return ctx
 
+
 #授業データをcsvファイルからアップデート
+@permission_required('admin.can_add_log_entry')
+
 def upload(request):
     try:
         if 'csv' in request.FILES:
