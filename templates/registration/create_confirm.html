@@ -2,30 +2,57 @@
 {% extends 'cissapp/layout.html' %}
 
 {% block content %}
-<div class="ui grid stackable">
-    <div class="eleven wide column">
-        <div class="ui breadcrumb">
-            <a href="{% url 'cissapp:index' %}" class="section">TOP</a>
-            <i class="right angle icon divider"></i>
-            <a class="active section">ユーザー作成</a>
+<style>
+    .table{
+      width:90%;
+      margin:auto;
+    }
+    button{
+        float: right;
+        margin-right: 20px;
+    }
+
+    </style>
+
+<br>
+<h1 class="text-center">Sign Up Confirm</h1>
+<br>
+
+
+<div class="container">
+    <h4 class="text-center font-weight-bold h4">User Info</h4>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>{{form.cleaned_data.username}}</td>
+        </tr>
+        <tr>
+            <td>Email of TMU</td>
+            <td>{{form.cleaned_data.email}}</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>********</td>
+        </tr>
+
+    </table>
+    <form class="" action="" method="POST">
+        <div class="">
+            {% csrf_token %}
+            {% csrf_token %}
+            {% for field in form %}
+            {{field.as_hidden}}
+            {% endfor %}
         </div>
-        <div class="ui segment">
-            <div class="content">
-                <div class="header"><h3>ユーザー作成</h3></div>
-                <table  class="ui celled table table table-hover" >
-                    <tr><td>お名前</td><td>{{form.cleaned_data.username}}</td></tr>
-                    <tr><td>パスワード</td><td>********</td></tr>
-                </table>
-                <form class="ui form" action="" method="POST">
-                    {% csrf_token %}
-                    {% for field in form %}
-                    {{field.as_hidden}}
-                    {% endfor %}
-                    <button class="ui button" name="next" value="back" type="submit">修正</button>
-                    <button class="ui orange button" name="next" value="regist" type="submit">登録</button>
-                </form>
-            </div>
-        </div>
-    </div>
+
+
+
+        <button class="btn btn-outline-info text-right" name="next" value="back" type="submit">修正</button>
+        <button class="btn btn-outline-info text-right" name="next" value="regist" type="submit">登録</button>
+    </form>
 </div>
+
+
+
+
 {% endblock %}
