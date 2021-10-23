@@ -25,14 +25,16 @@
           <div class="col-sm-7 text-secondary">
             {% if user.email %}{{user.email}}{% else %}未設定{% endif %}
           </div>
+          <!--
           <div class="col-sm-2">
             <a class="btn btn-outline-primary" href="{% url 'accounts:change' %}" role="button">編集</a>
           </div>
+          -->
         </div>
       </div>
     </div>
     <div class="text-right">
-        <a class="btn btn-outline-info text-right" href="{% url 'password_change' %}">パスワード変更</a>
+        <a class="btn btn-outline-info text-right" href="{% url 'accounts:password_change' %}">パスワード変更</a>
     </div>
 
 

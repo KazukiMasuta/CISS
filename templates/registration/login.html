@@ -65,7 +65,7 @@
                 {% endif %}
             {% endif %}
 
-            <form action="{% url 'login' %}" method="post" >
+            <form action="{% url 'accounts:login' %}" method="post" >
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}"/>
                 {{ form.as_p }}

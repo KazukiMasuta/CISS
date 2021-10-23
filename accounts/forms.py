@@ -181,7 +181,7 @@ class EmailAuthenticationForm(Form):
 
     error_messages = {
         'invalid_login': _(
-            "Please enter a correct %(username)s and password. Note that both "
+            "Please enter a correct %(email)s and password. Note that both "
             "fields may be case-sensitive."
         ),
         'inactive': _("This account is inactive."),
@@ -198,7 +198,8 @@ class EmailAuthenticationForm(Form):
         super().__init__(*args, **kwargs)
 
         # Set the max length and label for the "username" field.
-        self.email_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
+        # self.email_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
+        self.email_field = UserModel._meta.get_field(UserModel.EMAIL_FIELD)
         self.fields['email'].max_length = self.email_field.max_length or 254
         if self.fields['email'].label is None:
             self.fields['email'].label = capfirst(self.email_field.verbose_name)
@@ -243,5 +244,6 @@ class EmailAuthenticationForm(Form):
         return forms.ValidationError(
             self.error_messages['invalid_login'],
             code='invalid_login',
-            params={'username': _('Email')},
+            #params={'username': _('Email')},
+            params={'email': _('Email')},
         )
