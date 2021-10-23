@@ -8,8 +8,6 @@ app_name = 'cissapp'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-
     path('search', views.search, name='search'),
-
     #path('upload/', views.upload, name='upload'),
 ]
